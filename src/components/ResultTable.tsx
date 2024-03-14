@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   Table,
   TableHeader,
@@ -8,10 +8,22 @@ import {
   TableCell,
 } from '@nextui-org/react';
 import { eurToUsd } from '../devDataExchangeRateDaily';
+import { AppContext } from '@/AppContext';
+import dayjs from 'dayjs';
 
 function ResultTable() {
+  const { currencyCode, startDate, endDate } = useContext(AppContext);
+
   return (
     <div>
+      <p>
+        Currency Code:
+        {currencyCode}
+        Start Date:
+        {dayjs(startDate).format('YYYY-MM-DD')}
+        End Date:
+        {dayjs(endDate).format('YYYY-MM-DD')}
+      </p>
       <Table aria-label="Example static collection table">
         <TableHeader>
           <TableColumn>Date</TableColumn>

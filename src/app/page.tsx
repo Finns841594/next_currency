@@ -1,15 +1,17 @@
 'use client';
+import DatePickers from '@/components/DatePickers';
 import ResultTable from '@/components/ResultTable';
 import SearchBar from '@/components/SearchBar';
-import { NextUIProvider } from '@nextui-org/react';
+import { Providers } from '@/providers';
 
 export default function Home() {
   return (
-    <NextUIProvider>
+    <Providers>
       <main className="flex min-h-screen flex-col items-center p-24 gap-4">
         <SearchBar />
+        <DatePickers />
         <ResultTable />
       </main>
-    </NextUIProvider>
+    </Providers>
   );
 }
