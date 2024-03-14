@@ -1,13 +1,15 @@
 'use client';
+import ResultTable from '@/components/ResultTable';
 import SearchBar from '@/components/SearchBar';
 import { NextUIProvider } from '@nextui-org/react';
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <NextUIProvider>
+    <NextUIProvider>
+      <main className="flex min-h-screen flex-col items-center p-24 gap-4">
         <SearchBar />
-      </NextUIProvider>
-    </main>
+        <ResultTable />
+      </main>
+    </NextUIProvider>
   );
 }
