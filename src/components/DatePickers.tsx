@@ -1,7 +1,14 @@
 import { AppContext } from '@/AppContext';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useContext } from 'react';
-import dayjs from 'dayjs';
+
+const customStyle = {
+  '& .MuiInputBase-root': {
+    backgroundColor: '#F5F5F5',
+    borderRadius: '10px',
+    ':hover:': { backgroundColor: '#E4E4E7' },
+  },
+};
 
 const DatePickers = () => {
   const { startDate, setStartDate, endDate, setEndDate } =
@@ -12,18 +19,16 @@ const DatePickers = () => {
       <DatePicker
         label="Start Date"
         value={startDate}
-        onChange={newValue => {
-          setStartDate(newValue);
-          // console.log(dayjs(newValue).format('YYYY-MM-DD '));
-        }}
+        onChange={setStartDate}
+        sx={customStyle}
       />
       <DatePicker
         label="End Date"
         value={endDate}
         onChange={newValue => {
           setEndDate(newValue);
-          // console.log(dayjs(newValue).format('YYYY-MM-DD '));
         }}
+        sx={customStyle}
       />
     </>
   );

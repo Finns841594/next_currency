@@ -1,12 +1,13 @@
 import { Dispatch, SetStateAction, createContext } from 'react';
+import { Dayjs } from 'dayjs';
 
 interface AppContextProp {
   currencyCode: string;
   setCurrencyCode: Dispatch<SetStateAction<string>>;
-  startDate: Date | null;
-  setStartDate: Dispatch<SetStateAction<Date | null>>;
-  endDate: Date | null;
-  setEndDate: Dispatch<SetStateAction<Date | null>>;
+  startDate: Dayjs | null;
+  setStartDate: Dispatch<SetStateAction<Dayjs | null>>;
+  endDate: Dayjs | null;
+  setEndDate: Dispatch<SetStateAction<Dayjs | null>>;
 }
 
 export const AppContext = createContext<AppContextProp>({
