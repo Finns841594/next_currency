@@ -3,6 +3,8 @@ import path from 'path';
 import dayjs, { Dayjs } from 'dayjs';
 import axios from 'axios';
 
+const apikey = process.env.API_KEY;
+
 export async function cacheData(
   data: any,
   currencyCode: string
@@ -31,7 +33,7 @@ export async function readCachedData(currencyCode: string): Promise<any> {
   }
 }
 
-const url =
+const testUrl =
   'https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=EUR&to_symbol=USD&outputsize=full&apikey=demo';
 
 export async function GET(request: Request) {
@@ -50,7 +52,10 @@ export async function GET(request: Request) {
       }
 
       // Fetch new data if there's no cached data
-      const res = await axios.get(url);
+      // const res = await axios.get(testUrl);
+      const res = await axios.get(
+        `https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=${code}&to_symbol=USD&outputsize=full&apikey=${apikey}`
+      );
       console.log('fetching from external');
       await cacheData(res.data, code);
       return new Response(JSON.stringify(res.data), {

@@ -1,17 +1,17 @@
 'use client';
-import DatePickers from '@/components/DatePickers';
-import ResultTable from '@/components/ResultTable';
-import SearchBar from '@/components/SearchBar';
-import SearchButton from '@/components/SearchButton';
 import { Providers } from '@/providers';
+import DatePickers from './components/DatePickers';
+import ResultTable from './components/ResultTable';
+import SearchBar from './components/SearchBar';
 
 export default function Home() {
   return (
     <Providers>
-      <main className="flex min-h-screen flex-col items-center p-24 gap-4">
-        <SearchBar />
-        <DatePickers />
-        <SearchButton />
+      <main className="flex flex-row items-top p-24 gap-8">
+        <div className="flex flex-col gap-4">
+          <SearchBar />
+          <DatePickers />
+        </div>
         <ResultTable />
       </main>
     </Providers>
