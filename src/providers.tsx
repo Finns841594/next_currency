@@ -5,6 +5,9 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { AppContext } from './AppContext';
 import { useState } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 
 export function Providers({ children }: { children: React.ReactNode }) {
   const [startDate, setStartDate] = useState<Dayjs | null>(dayjs());
@@ -23,7 +26,11 @@ export function Providers({ children }: { children: React.ReactNode }) {
           setCurrencyCode,
         }}
       >
-        <NextUIProvider>{children}</NextUIProvider>
+        <NextUIProvider>
+          <QueryClientProvider client={queryClient}>
+            {children}
+          </QueryClientProvider>
+        </NextUIProvider>
       </AppContext.Provider>
     </LocalizationProvider>
   );

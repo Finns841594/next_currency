@@ -7,25 +7,31 @@ import {
   TableRow,
   TableCell,
 } from '@nextui-org/react';
-import { data } from '../cachedRates/EUR_2024-03-14';
 import { AppContext } from '@/AppContext';
-import dayjs from 'dayjs';
 import { listDatesBetween } from '@/utils';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { fetchExchangeRate } from '@/fetchingTools';
 
 const ResultTable = () => {
   const { currencyCode, startDate, endDate } = useContext(AppContext);
   const filteredDates = listDatesBetween(startDate!, endDate!).reverse();
 
+  const queryKey = [currencyCode];
+  const { data, error, isLoading } = useQuery({
+    queryKey,
+    queryFn: () => fetchExchangeRate(currencyCode),
+  });
+
+  if (isLoading) {
+    return <span>Loading...</span>;
+  }
+
+  if (error) {
+    return <span>Error: {error.message}</span>;
+  }
+
   return (
     <div>
-      <p>
-        Currency Code:
-        {currencyCode}
-        Start Date:
-        {dayjs(startDate).format('YYYY-MM-DD')}
-        End Date:
-        {dayjs(endDate).format('YYYY-MM-DD')}
-      </p>
       <Table aria-label="Example static collection table">
         <TableHeader>
           <TableColumn>Date</TableColumn>
