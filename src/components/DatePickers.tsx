@@ -5,7 +5,7 @@ import { useContext } from 'react';
 const customStyle = {
   '& .MuiInputBase-root': {
     backgroundColor: '#F5F5F5',
-    borderRadius: '10px',
+    borderRadius: '15px',
     ':hover:': { backgroundColor: '#E4E4E7' },
   },
 };

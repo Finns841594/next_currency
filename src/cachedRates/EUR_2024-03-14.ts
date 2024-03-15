@@ -1,4 +1,4 @@
-export const eurToUsd = {
+export const data = {
   'Meta Data': {
     '1. Information': 'Forex Daily Prices (open, high, low, close)',
     '2. From Symbol': 'EUR',

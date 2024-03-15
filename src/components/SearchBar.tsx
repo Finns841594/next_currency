@@ -3,7 +3,7 @@ import { Autocomplete, AutocompleteItem } from '@nextui-org/react';
 import { currencies } from './../data';
 import { AppContext } from '@/AppContext';
 
-function SearchBar() {
+const SearchBar = () => {
   const { currencyCode, setCurrencyCode } = useContext(AppContext);
 
   const onselectionchange = (value: Key) => {
@@ -20,13 +20,13 @@ function SearchBar() {
         onSelectionChange={onselectionchange}
       >
         {currencies.map(currency => (
-          <AutocompleteItem key={currency} value={currency}>
-            {currency}
+          <AutocompleteItem key={currency.code} value={currency.code}>
+            {currency.code}
           </AutocompleteItem>
         ))}
       </Autocomplete>
     </div>
   );
-}
+};
 
 export default SearchBar;

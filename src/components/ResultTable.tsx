@@ -7,14 +7,14 @@ import {
   TableRow,
   TableCell,
 } from '@nextui-org/react';
-import { eurToUsd } from '../cachedRates/eurToUsd';
+import { data } from '../cachedRates/EUR_2024-03-14';
 import { AppContext } from '@/AppContext';
 import dayjs from 'dayjs';
 import { listDatesBetween } from '@/utils';
 
-function ResultTable() {
+const ResultTable = () => {
   const { currencyCode, startDate, endDate } = useContext(AppContext);
-  const filteredDates = listDatesBetween(startDate!, endDate!);
+  const filteredDates = listDatesBetween(startDate!, endDate!).reverse();
 
   return (
     <div>
@@ -36,8 +36,8 @@ function ResultTable() {
             <TableRow key={date}>
               <TableCell>{date}</TableCell>
               <TableCell>
-                {eurToUsd['Time Series FX (Daily)'][date]
-                  ? eurToUsd['Time Series FX (Daily)'][date]['4. close']
+                {data['Time Series FX (Daily)'][date]
+                  ? data['Time Series FX (Daily)'][date]['4. close']
                   : 'No data'}
               </TableCell>
             </TableRow>
@@ -46,6 +46,6 @@ function ResultTable() {
       </Table>
     </div>
   );
-}
+};
 
 export default ResultTable;

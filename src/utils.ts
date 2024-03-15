@@ -12,3 +12,12 @@ export const listDatesBetween = (
   }
   return dates;
 };
+
+import { writeFile } from 'fs/promises';
+import path from 'path';
+
+export async function cacheData(data: any, filename: string): Promise<void> {
+  const filePath = path.join(process.cwd(), 'cache', filename);
+  const jsonData = JSON.stringify(data, null, 2);
+  await writeFile(filePath, jsonData, 'utf8');
+}
