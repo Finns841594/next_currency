@@ -10,9 +10,8 @@ import {
   CircularProgress,
 } from '@nextui-org/react';
 import { AppContext } from '@/AppContext';
-import { listDatesBetween } from '@/utils';
+import { listDatesBetween, fetchExchangeRate } from '@/utils';
 import { useQuery } from '@tanstack/react-query';
-import { fetchExchangeRate } from '@/fetchingTools';
 
 const ResultTable = () => {
   const { currencyCode, startDate, endDate } = useContext(AppContext);
@@ -43,6 +42,11 @@ const ResultTable = () => {
 
   if (error) {
     return <span>Error: {error.message}</span>;
+  }
+
+  // For handling api limits
+  if (!data['Time Series FX (Daily)']) {
+    return <span className="w-[360px]">Error: {data.Information}</span>;
   }
 
   return (

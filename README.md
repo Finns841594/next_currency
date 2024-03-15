@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+![Intro](./public/screenshot.png)
 
 ## Getting Started
 
-First, run the development server:
+First, create `.env` file with one line at the root of the project:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+API_KEY=[apiKey]
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+API is from Alpha Vantage.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Then, run the development server:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```bash
+npm i
+npm run dev
+```
 
-## Learn More
+## Answer to Requirements
 
-To learn more about Next.js, take a look at the following resources:
+### 1. API KEY
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+I used Alpha Vantage as requested. For today, the apikey you provide should still have left access times
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### 2. Search Functionality
 
-## Deploy on Vercel
+A select component with autocomplete function is used for this requirement. The default value set to SEK. All the possible currency codes are from Alpha Vantage, I turned them into an array of objects saved in `data.ts`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 3. Date Range Selection
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+I used two date picker component from MUI for this. You can either type in or select by click calendar icon.
+
+I ususally use only one UI library for a project, NextUI is my choice for the most of time. But they don't have components for selecting dates, thus I install MUI and styled it.
+
+### 4. Results Table
+
+Selected currency code and dates are stored in app context. Based on Alpha Vantage API, you send one request to get all the history exchange rate of a currency by once, so I only request the data when the selected currency code changed, and then display the filtered data by selected dates.
+
+### 5. Caching Mechanism
+
+Before I use `TanStack` for the frontend caching, and build caching database for backend. For this fontend project, I was planning to use `TanStack` for caching as well. But I meet problem that it was not working as I wanted, so I build a backend point on the server side code so it can write the fetched data into files stored in `cachedRates` as caching.
+
+If I have more time I could finish this function better. But for an 8 hours task, this is my functional solution.
+
+### 6. Error Handling
+
+For the user interface, I used the method like limiting the inputs to prevent from inputing error. For fetching errors, I display them in the console.log. Due to spend most of my time on caching mechanism, I don't have the chance to enhance the error handling further. But I think I did the basics.
+
+### 7. Styling
+
+I styled the components and color choices to make it looks appealing and intuitive. But I just run out of time for responsiveness.
