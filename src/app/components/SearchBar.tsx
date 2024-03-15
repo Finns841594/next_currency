@@ -14,10 +14,12 @@ const SearchBar = () => {
   return (
     <div>
       <Autocomplete
-        label="Type a currency code"
+        label="Type or select a currency code"
         className="max-w-s"
         defaultSelectedKey={currencyCode}
         onSelectionChange={onselectionchange}
+        // for sovling a terminal error
+        onKeyDown={(e: any) => e.continuePropagation()}
       >
         {currencies.map(currency => (
           <AutocompleteItem key={currency.code} value={currency.code}>

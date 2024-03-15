@@ -10,7 +10,9 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 const queryClient = new QueryClient();
 
 export function Providers({ children }: { children: React.ReactNode }) {
-  const [startDate, setStartDate] = useState<Dayjs | null>(dayjs());
+  const [startDate, setStartDate] = useState<Dayjs | null>(
+    dayjs().subtract(10, 'day')
+  );
   const [endDate, setEndDate] = useState<Dayjs | null>(dayjs());
   const [currencyCode, setCurrencyCode] = useState<string>('SEK');
 
